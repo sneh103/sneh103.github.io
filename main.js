@@ -5,11 +5,11 @@ var ajaxCall = (key, url, prompt) => {
       type: "POST",
       dataType: "json",
       data: JSON.stringify({
-        model: "text-davinci-003",
+        model: "text-davinci-002",
         prompt: prompt,
-        max_tokens: 150,
-        temperature: 0,
-        top_p:1.0
+        max_tokens: 1024,
+        n: 1,
+        temperature: 0.5,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -28,6 +28,7 @@ var ajaxCall = (key, url, prompt) => {
   });
 };
 
+const url = "https://api.openai.com/v1";
 
 (function () {
   const template = document.createElement("template");
@@ -41,10 +42,10 @@ var ajaxCall = (key, url, prompt) => {
     async post(apiKey, endpoint, prompt) {
       const { response } = await ajaxCall(
         apiKey,
-        endpoint,
+        `${url}/${endpoint}`,
         prompt
       );
-      console.log(response.choices[0].text);
+      //console.log(response.choices[0].text);
       return response.choices[0].text;
     }
   }
