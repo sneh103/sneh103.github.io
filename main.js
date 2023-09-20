@@ -5,9 +5,9 @@ var ajaxCall = (key, url, prompt) => {
       type: "POST",
       dataType: "json",
       data: JSON.stringify({
-        model: "text-davinci-003",
-        prompt: prompt,
-        max_tokens: 1024,
+        model: "gpt-3.5-turbo",
+        prompt: [{"role": "user", "content": prompt}],
+        max_tokens: 4097,
         n: 1,
         temperature: 0.5,
       }),
@@ -46,7 +46,7 @@ const url = "https://api.openai.com/v1";
         prompt
       );
       //console.log(response.choices[0].text);
-      return response.choices[0].text;
+      return response.choices[0].message.content;
     }
   }
   customElements.define("custom-widget", MainWebComponent);
