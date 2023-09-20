@@ -1,4 +1,4 @@
-var ajaxCall = (key, url, messages) => {
+var ajaxCall = (key, url, prompt) => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: url,
@@ -6,7 +6,7 @@ var ajaxCall = (key, url, messages) => {
       dataType: "json",
       data: JSON.stringify({
         model: "gpt-3.5-turbo",
-        messages: [{"role": "user", "content": messages}],
+        prompt: [{"role": "user", "content": prompt}],
         max_tokens: 5000,
         n: 1,
         temperature: 0.5,
@@ -39,11 +39,11 @@ const url = "https://api.openai.com/v1";
       </div>
     `;
   class MainWebComponent extends HTMLElement {
-    async post(apiKey, endpoint, messages) {
+    async post(apiKey, endpoint, prompt) {
       const { response } = await ajaxCall(
         apiKey,
         `${url}/${endpoint}`,
-        messages
+        prompt
       );
       //console.log(response.choices[0].text);
       return response.choices[0].message.content;
