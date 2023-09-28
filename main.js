@@ -6,7 +6,7 @@ var ajaxCall = (key, url, prompt) => {
       dataType: "json",
       data: JSON.stringify({
         model: "text-davinci-003",
-        prompt: [{"role": "user", "content": prompt}],
+        prompt: prompt,
         max_tokens: 5000,
         n: 1,
         temperature: 0.5,
